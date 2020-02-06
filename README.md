@@ -49,61 +49,60 @@ create table Categories (
 );
 create table Promotion (
 	PromotionId int identity(1,1),
-	PromotionName nvarchar(100),
-	Discount int,
-	DesPromotion nvarchar(50),
-	UrlPicPromotion nvarchar(100),
-	StartDate date,
-	EndDate date,
+	PromotionName nvarchar(100) not null,
+	Discount int not null,
+	DesPromotion nvarchar(50) not null,
+	UrlPicPromotion nvarchar(100) not null,
+	StartDate date not null,
+	EndDate date not null,
 	primary key (PromotionId)
 );
 create table Products (
 	ProductId int identity(1,1),
-	ProductName nvarchar(50),
-	PromotionId int,
-	SupplierId int,
-	CategoryId int,
-	Origin nvarchar(50),
-	Price decimal,
-	UnitPrice nvarchar(20),
+	ProductName nvarchar(50) not null,
+	PromotionId int not null,
+	SupplierId int not null,
+	CategoryId int not null,
+	Origin nvarchar(50) not null,
+	Price decimal not null,
 	primary key(ProductId),
 	foreign key (PromotionId) references Promotion(PromotionId)
 );
 create table SizeShoes(
-	ProductId int,
-	Size int,
+	ProductId int not null,
+	Size int not null,
 	primary key(ProductId),
 	foreign key (ProductId) references Products(ProductId)
 )
 create table ColorShoes(
-	ProductId int ,
-	Color nvarchar(20),
-	UrlImage nvarchar(100),
+	ProductId int not null,
+	Color nvarchar(20) not null,
+	UrlImage nvarchar(100) not null,
 	primary key(ProductId),
 	foreign key (ProductId) references Products(ProductId)
 );
 create table ImageShoes(
-	ProductId int ,
-	UrlImage nvarchar(100),
+	ProductId int not null,
+	UrlImage nvarchar(100) not null,
 	primary key(ProductId),
 	foreign key (ProductId) references Products(ProductId)
 )
 create table Orders(
 	OrderId int identity(1,1),
-	UserId int,
-	OrderDate datetime,
-	DeliveryDate date,
-	DeliveryCharge float,
+	UserId int not null,
+	OrderDate datetime not null,
+	DeliveryDate date not null,
+	DeliveryCharge float not null,
 	primary key(OrderId),
 	foreign key (UserId) references UserAcount(UserId)
 );
 create table OrdersDetails(
-	OrderId int ,
-	ProductId int,
-	Price decimal,
-	Size int,
-	Color nvarchar(20),
-	Discount int,
+	OrderId int not null,
+	ProductId int not null,
+	Price decimal not null,
+	Size int not null,
+	Color nvarchar(20) not null,
+	Discount int ,
 	primary key (OrderId,ProductId),
 	foreign key (ProductId) references Products(ProductId),
 	foreign key (OrderId) references Orders(OrderId)
