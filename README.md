@@ -21,6 +21,7 @@ create table UserAcount(
 	Email nvarchar(50) not null,
 	PhoneNumber nvarchar(15) not null,
 	AddressHome nvarchar(100) not null,
+	Country nvarchar(20),
 	Password nvarchar(50) not null,
 	primary key (UserId),
 	foreign key (RoleId) references RoleUser(RoleId)
@@ -59,26 +60,38 @@ create table Promotion (
 create table Products (
 	ProductId int identity(1,1),
 	ProductName nvarchar(50),
+	PromotionId int,
 	SupplierId int,
 	CategoryId int,
 	Origin nvarchar(50),
-	Size int
+	Price decimal,
+	UnitPrice nvarchar(20),
+	primary key(ProductId),
+	foreign key (PromotionId) references Promotion(PromotionId)
 );
 create table SizeShoes(
 	ProductId int,
-	Size nvarchar(20),
-	primary key(ProductId)
+	Size int,
+	primary key(ProductId),
+	foreign key (ProductId) references Products(ProductId)
 )
 create table ColorShoes(
 	ProductId int ,
 	Color nvarchar(20),
 	UrlImage nvarchar(100),
-	primary key(ProductId)
+	primary key(ProductId),
+	foreign key (ProductId) references Products(ProductId)
 );
 create table ImageShoes(
 	ProductId int ,
 	UrlImage nvarchar(100),
-	primary key(ProductId)
+	primary key(ProductId),
+	foreign key (ProductId) references Products(ProductId)
 )
-
-
+create table Orders(
+	OrderId int identity(1,1),
+	UserId int,
+	OrderDate datetime,
+	DeliveryDarte date,
+	DeliveryCharge float,
+);
