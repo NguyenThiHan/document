@@ -104,6 +104,8 @@ create table OrdersDetails(
 	Size int,
 	Color nvarchar(20),
 	Discount int,
-	primary key (OrderId,ProductId)
+	primary key (OrderId,ProductId),
+	foreign key (ProductId) references Products(ProductId),
+	foreign key (OrderId) references Orders(OrderId)
 );
 
