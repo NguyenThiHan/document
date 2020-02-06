@@ -92,6 +92,18 @@ create table Orders(
 	OrderId int identity(1,1),
 	UserId int,
 	OrderDate datetime,
-	DeliveryDarte date,
+	DeliveryDate date,
 	DeliveryCharge float,
+	primary key(OrderId),
+	foreign key (UserId) references UserAcount(UserId)
 );
+create table OrdersDetails(
+	OrderId int ,
+	ProductId int,
+	Price decimal,
+	Size int,
+	Color nvarchar(20),
+	Discount int,
+	primary key (OrderId,ProductId)
+);
+
